@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharityConnect - Search Events</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 搜索页特定样式 */
+        .search-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        
+        .search-results {
+            margin-top: 30px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>CharityConnect</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search.html" class="active">Search Events</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Find Your Perfect Charity Event</h2>
+            <p>Use the filters below to discover events that match your interests and availability.</p>
+        </section>
+
+        <section class="search-container">
+            <div class="search-form">
+                <form id="searchForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category">
+                                <option value="">All Categories</option>
+                                <!-- Categories will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="Enter city or venue...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date">
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Search Events</button>
+                        <button type="button" id="clearBtn" class="btn btn-secondary">Clear Filters</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="search-results">
+                <h2>Search Results</h2>
+                <div id="search-results-list" class="event-list">
+                    <!-- Search results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 CharityConnect. For PROG2002 Assignment.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载类别下拉框
+            loadCategories();
+            
+            // 设置表单提交事件
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault(); // 阻止表单默认提交行为
+                searchEvents();
+            });
+            
+            // 设置清除按钮事件
+            document.getElementById('clearBtn').addEventListener('click', function() {
+                clearFilters();
+            });
+            
+            // 初始加载时显示所有活动
+            searchEvents();
+        });
+
+        // 清除过滤器
+        function clearFilters() {
+            document.getElementById('category').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('date').value = '';
+            
+            // 清除后重新搜索显示所有活动
+            searchEvents();
+        }
+    </script>
+</body>
+</html>

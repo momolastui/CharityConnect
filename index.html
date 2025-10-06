@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharityConnect - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>CharityConnect</h1>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="search.html">Search Events</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Make a Difference, Together</h2>
+            <p>Discover and participate in charity events that matter to you.</p>
+        </section>
+
+        <section class="events-container">
+            <h2>Upcoming Events</h2>
+            <div id="event-list" class="event-list">
+                <!-- JavaScript将把活动卡片动态加载到这里 -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 CharityConnect. For PROG2002 Assignment.</p>
+    </footer>
+
+    <!-- 引入我们的JavaScript -->
+    <script src="scripts.js"></script>
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEvents();
+        });
+    </script>
+</body>
+</html>
